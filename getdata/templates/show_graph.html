@@ -1,0 +1,257 @@
+<!doctype html>
+<html class="zc-html">
+
+<head>
+  <meta charset="utf-8">
+  <title>show graph</title>
+  <script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <style>
+    .zc-body {
+      background: #2C2C39;
+    }
+
+    .chart--container {
+      height: 100%;
+      width: 100%;
+      min-height: 530px;
+    }
+     #chart-text {
+        position: absolute;
+        bottom: 50;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        color: #E3E3E5;
+    }
+
+    .zc-ref {
+      display: none;
+    }
+  </style>
+</head>
+​
+
+<body class="zc-body">
+  ​
+  <div id="myChart" class="chart--container">
+    <a href="https://www.zingchart.com/" rel="noopener" class="zc-ref">Powered by ZingChart</a>
+  </div>
+  <div id="chart-text">Some text to display under the chart</div>
+  <div id="date-time"></div>
+
+
+  <script>
+      const zeroFill = n => {
+				return ('0' + n).slice(-2);
+			}
+
+			// Creates interval
+			const interval = setInterval(() => {
+				// Get current time
+				const now = new Date();
+
+				// Format date as in mm/dd/aaaa hh:ii:ss
+				const dateTime = zeroFill((now.getMonth() + 1)) + '/' + zeroFill(now.getUTCDate()) + '/' + now.getFullYear() + ' ' + zeroFill(now.getHours()) + ':' + zeroFill(now.getMinutes()) + ':' + zeroFill(now.getSeconds());
+
+				// Display the date and time on the screen using div#date-time
+				document.getElementById('date-time').innerHTML = dateTime;
+			}, 1000);
+
+  var temps = {{ temps|safe }};
+  var humis = {{ humis|safe }};
+  var buzs = {{ buzs|safe }};
+
+  var id = {{ id|safe }};
+
+ // var lastH = {{ lastH|safe }};
+ // var lastT = {{ lastT|safe }};
+
+
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"]; // CHART CONFIG
+    // -----------------------------
+
+    let chartText = document.getElementById("chart-text");
+    let lastT = temps[temps.length - 1];
+    let lastH = humis[temps.length - 1];
+    let lastB = buzs[buzs.length - 1]
+    chartText.innerHTML = "Temperature is: " + lastT + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspHumidity is: " + lastH + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Fire: " + lastB  ;
+
+    let chartConfig = {
+      type: 'line',
+      backgroundColor: '#2C2C39',
+      title: {
+        text: 'Humidity and Temperature From ESP32',
+        adjustLayout: true,
+        marginTop: '7px',
+        fontColor: '#E3E3E5'
+      },
+
+      legend: {
+        align: 'center',
+        backgroundColor: 'none',
+        borderWidth: '0px',
+        item: {
+          cursor: 'hand',
+          fontColor: '#E3E3E5'
+        },
+        marker: {
+          type: 'circle',
+          borderWidth: '0px',
+          cursor: 'hand'
+        },
+        verticalAlign: 'top'
+      },
+
+      plot: {
+        aspect: 'spline',
+        lineWidth: '2px',
+        marker: {
+          borderWidth: '0px',
+          size: '5px'
+        }
+      },
+      plotarea: {
+        margin: 'dynamic 70'
+      },
+      scaleX: {
+        item: {
+          fontColor: '#E3E3E5'
+        },
+        lineColor: '#E3E3E5',
+        Value: id,
+
+        zooming: true,
+        zoomTo: [0, id.length]
+      },
+      scaleY: {
+        guide: {
+          lineStyle: 'dashed'
+        },
+        item: {
+          fontColor: '#E3E3E5'
+        },
+        lineColor: '#E3E3E5',
+        minorGuide: {
+          alpha: 0.7,
+          lineColor: '#E3E3E5',
+          lineStyle: 'dashed',
+          lineWidth: '1px',
+          visible: true
+        },
+        minorTick: {
+          lineColor: '#E3E3E5'
+        },
+        minorTicks: 1,
+        tick: {
+          lineColor: '#E3E3E5'
+        }
+      },
+      crosshairX: {
+        marker: {
+          alpha: 0.5,
+          size: '7px'
+        },
+        plotLabel: {
+          borderRadius: '3px',
+          multiple: true
+        },
+        scaleLabel: {
+          backgroundColor: '#53535e',
+          borderRadius: '3px'
+        }
+      },
+      crosshairY: {
+        type: 'multiple',
+        lineColor: '#E3E3E5',
+        scaleLabel: {
+          bold: true,
+          borderRadius: '3px',
+          decimals: 2,
+          fontColor: '#2C2C39',
+          offsetX: '-5px'
+        }
+      },
+
+      shapes: [{
+        type: 'rectangle',
+        id: 'view_all',
+        backgroundColor: '#53535e',
+        borderColor: '#E3E3E5',
+        borderRadius: '3px',
+        borderWidth: '1px',
+        cursor: 'hand',
+        label: {
+          text: 'View All',
+          bold: true,
+          fontColor: '#E3E3E5',
+          fontSize: '12px'
+        },
+        width: '75px',
+        height: '20px',
+        x: '85%',
+        y: '11%'
+      }],
+      tooltip: {
+        borderRadius: '3px',
+        borderWidth: '0px'
+      },
+      preview: {
+        adjustLayout: true,
+        borderColor: '#E3E3E5',
+        label: {
+          fontColor: '#E3E3E5'
+        },
+        mask: {
+          backgroundColor: '#E3E3E5'
+        }
+      },
+
+
+      series: [
+
+        {
+          values: temps,
+          text:"Temeprature",
+          lineColor: '#FF0000',
+          marker: {
+            backgroundColor: '#FEB32E'
+          }
+        },
+        {
+          values: humis ,
+          text:"Humidity",
+          lineColor: '#31A59A',
+          marker: {
+            backgroundColor: '#31A59A'
+          }
+        }
+      ]
+
+
+    };
+
+    // EVENTS
+    // -----------------------------
+    zingchart.bind('myChart', 'shape_click', function(p) {
+      if (p.shapeid == 'view_all') {
+        zingchart.exec(p.id, 'viewall');
+      }
+    })
+
+    // RENDER CHARTS
+    // -----------------------------
+    zingchart.render({
+      id: 'myChart',
+      data: chartConfig,
+      height: '100%',
+      width: '100%',
+    })
+
+
+
+  </script>
+</body>
+
+</html>
