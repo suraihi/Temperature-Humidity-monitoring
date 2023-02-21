@@ -16,7 +16,7 @@ In addition to viral infections and respiratory illnesses, an overly dry environ
 
 As climate change persists, it’s more important than ever for landlords and business owners to consider the impacts of seasonal heat waves and cold fronts in order to keep their tenants and employees safe. Electronic equipment, exterior building construction, window composition, lack of airflow, and certain industrial practices may also play a part into your space’s temperature and humidity levels.
 
-Most buildings don’t have the ability to widely track temperature and humidity, with readings being confined to a single heating zone. A system that includes a temperature and humidity monitor can help you uncover areas that are too hot, cold, or humid in more detail. This can help you prevent your occupants from being exposed to dangerous indoor environments that could lead to serious health issues.
+Most buildings don’t have the ability to widely track temperature and humidity, with readings being confined to a single heating zone. A system that includes a temperature and humidity monitor can help you uncover areas that are too hot, cold, or humid in more detail. This can help you prevent your occupants from being exposed to dangerous indoor environments that could lead to serious health issues. Above 25ºC and 50% moisture can cause serious heat illnesses, cognitive impairment, and mold.Below 20ºC and 30% moisture can impact mental health, viral survivability, and blood pressure. S we are going to implement IOT System that can track Tempreture And Humidity and Display them on DashBoard, this DashBoard will be updated continuously as we will use Cloud Platform
 
 
 # 2.0 System Arctitecture 
