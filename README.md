@@ -31,12 +31,18 @@ our system architecture will be divided on three main sections
 
 # 3.0 Sensors
 -  ESP32
+
+
  ![image](https://user-images.githubusercontent.com/117296912/220287244-e1f1b117-0457-4925-9b8e-abe97c576d78.png)
 
 -  Tempreture and Humidity Sensor (DHT22)
+
+
 ![image](https://user-images.githubusercontent.com/117296912/220287560-3a289079-3253-42a0-b4fc-02eea6a4e418.png)
 
-##Sensors OverView
+## Sensors OverView
+
+
 ![image](https://user-images.githubusercontent.com/117296912/220292150-c8a5a636-2e2e-4ede-9e5d-18a7ee88a7e1.png)
 
 
